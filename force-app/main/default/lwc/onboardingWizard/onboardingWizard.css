@@ -1,0 +1,21 @@
+.slds-box {
+    border-radius: 0.25rem;
+    padding: 1rem;
+}
+
+.slds-m-top_small {
+    margin-top: 0.5rem;
+}
+
+.slds-m-top_large {
+    margin-top: 2rem;
+}
+
+.slds-m-left_small {
+    margin-left: 0.5rem;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
