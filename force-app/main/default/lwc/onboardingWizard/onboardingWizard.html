@@ -1,64 +1,30 @@
 <template>
-    <div class="slds-box slds-theme_default">
-        <div class="slds-grid slds-wrap">
-            <div class="slds-col slds-size_1-of-1">
-                <h2 class="slds-text-heading_large">Onboarding Wizard</h2>
-                <p class="slds-m-top_small">Step {currentStep} of {totalSteps}</p>
-            </div>
-        </div>
-
-        <div class="slds-grid slds-wrap slds-m-top_large">
-            <div class="slds-col slds-size_1-of-1">
-                <!-- Wizard content based on current step -->
-                <template if:true={isFirstStep}>
-                    <div class="slds-box slds-theme_shade">
-                        <h3>Step 1: Welcome</h3>
-                        <p>Welcome to the onboarding wizard. Let's get started!</p>
-                    </div>
-                </template>
-
-                <template if:false={isFirstStep}>
-                    <template if:true={isLastStep}>
-                        <div class="slds-box slds-theme_shade">
-                            <h3>Step 3: Complete</h3>
-                            <p>You've completed the onboarding process!</p>
-                        </div>
+    <lightning-card title="Customer Onboarding Wizard" icon-name="standard:account">
+        
+        <div class="slds-m-around_medium">
+            <template if:true={accounts}>
+                <ul class="slds-m-bottom_medium">
+                    <!-- DANGER: Missing 'key' attribute in the iterator -->
+                    <template for:each={accounts} for:item="acc">
+                        <li class="slds-box slds-m-bottom_small">
+                            <strong>{acc.Name}</strong> - {acc.Industry}
+                        </li>
                     </template>
-                    <template if:false={isLastStep}>
-                        <div class="slds-box slds-theme_shade">
-                            <h3>Step 2: Details</h3>
-                            <p>Please provide the required information.</p>
-                        </div>
-                    </template>
-                </template>
-            </div>
+                </ul>
+            </template>
+            
+            <template if:true={error}>
+                <div class="slds-text-color_error">
+                    Error loading accounts: {error}
+                </div>
+            </template>
+
+            <lightning-button 
+                variant="brand" 
+                label="Process All Pending" 
+                onclick={handleOnboard}>
+            </lightning-button>
         </div>
 
-        <!-- Navigation buttons -->
-        <div class="slds-grid slds-wrap slds-m-top_large">
-            <div class="slds-col slds-size_1-of-1 slds-text-align_right">
-                <button
-                    class="slds-button slds-button_neutral"
-                    onclick={handlePrevious}
-                    disabled={isFirstStep}
-                >
-                    Previous
-                </button>
-                <button
-                    class="slds-button slds-button_brand slds-m-left_small"
-                    onclick={handleNext}
-                    disabled={isLastStep}
-                >
-                    Next
-                </button>
-                <button
-                    class="slds-button slds-button_success slds-m-left_small"
-                    onclick={handleFinish}
-                    if:true={isLastStep}
-                >
-                    Finish
-                </button>
-            </div>
-        </div>
-    </div>
+    </lightning-card>
 </template>
