@@ -4,7 +4,6 @@
         <div class="slds-m-around_medium">
             <template if:true={accounts}>
                 <ul class="slds-m-bottom_medium">
-                    <!-- DANGER: Missing 'key' attribute in the iterator -->
                     <template for:each={accounts} for:item="acc">
                         <li class="slds-box slds-m-bottom_small">
                             <strong>{acc.Name}</strong> - {acc.Industry}
